@@ -2,27 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraSwap : MonoBehaviour {
+public class CameraSwap : MonoBehaviour
+{
+    public Transform Player;
+    public Camera FirstPersonCam, ThirdPersonCam;
+    public KeyCode TKey;
+    public bool camSwitch = false;
 
-    public DragMouseOrbit perspshift;
-
-	// Use this for initialization
-	void Start () {
-
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-        if (Input.GetKeyUp(KeyCode.Space))
+    void Update()
+    {
+        if (Input.GetKeyDown(TKey))
         {
-           
-            perspshift.enabled = !perspshift.enabled;
-            GameObject.Find("CAMERA").transform.localPosition = new Vector3(-2.85f, 1.3f, 1.1f);
-            GameObject.Find("CAMERA").transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90f));
-
+            camSwitch = !camSwitch;
+            FirstPersonCam.gameObject.SetActive(camSwitch);
+            ThirdPersonCam.gameObject.SetActive(!camSwitch);
         }
-
     }
 }
